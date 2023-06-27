@@ -11,6 +11,8 @@ Each module will contain a description of the data structure, an example of how 
 ## Author Information
 
 Ashlee Butterfield
+
 CSE 212, Section A3
+
 ashleeb3@byui.edu
 
