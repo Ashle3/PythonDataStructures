@@ -17,6 +17,26 @@ Online shopping is another great example of when queues are used. When a popular
 In python, we use a list to create a queue. The process of creating an empty queue is the same as creating an empty list:
 
 ```python
+#define an empty queue
 my_queue = []
 
 ```
+
+To add an item to the queue, we use the .append() function:
+
+```python
+#append objects to the list
+my_queue.append("Mary")
+my_queue.append("Ted")
+my_queue.append("Roger")
+
+print(my_queue)
+```
+
+If you print my_queue, it should return:
+
+```python
+['Mary', 'Ted', 'Roger']
+```
+
+As you see, each new name is enqueued to the back of the queue in the order they were added. The process of enqueueing items to the back of the queue is O(1) performance, since the .append() function doesn't require a lot of memory.  
