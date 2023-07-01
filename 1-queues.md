@@ -14,3 +14,9 @@ Online shopping is another great example of when queues are used. When a popular
 
 ## Queues in Python
 
+In python, we use a list to create a queue. The process of creating an empty queue is the same as creating an empty list:
+
+```python
+my_queue = []
+
+```
