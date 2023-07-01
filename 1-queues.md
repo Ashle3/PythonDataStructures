@@ -33,10 +33,28 @@ my_queue.append("Roger")
 print(my_queue)
 ```
 
-If you print my_queue, it should return:
+If you run the code above, it should return:
 
 ```python
 ['Mary', 'Ted', 'Roger']
 ```
 
 As you see, each new name is enqueued to the back of the queue in the order they were added. The process of enqueueing items to the back of the queue is O(1) performance, since the .append() function doesn't require a lot of memory.  
+
+Dequeueing an item is a little more complex. Due to the rules of the queueing structure, you can only remove items at the front of the queue. The .pop() method alone would not be helpful in this case, since it removes the last item in the queue. To make the .pop() method work, we need to specify the index of the item we would like to remove, which in our case, would be 0.
+
+```python
+my_queue.pop(0)
+```
+This can also be written using the delete function:
+
+```python
+del my_queue[0]
+```
+Whichever way you write it is up to you, but they both do the same thing. If you were to run either of these lines of code, it would return:
+
+```python
+['Ted', 'Roger']
+```
+
+The process of dequeueing an item has a performance of O(n). This is because you need to first isolate the item you'd like to remove (O(1)), and then delete it (O(1)). Since both of these processes are O(1) performance, putting them together would make 2(O(n)), which translates to O(n).
