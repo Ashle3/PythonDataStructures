@@ -132,6 +132,8 @@ Happy New Year!
 ```
 
 Once you've solved the problem, you can check your answer with the solution:
+
 [Solution](counting_down_solution.py)
+
 
 [Back to Welcome Page](0-welcome.md)
