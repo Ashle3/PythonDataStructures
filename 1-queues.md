@@ -112,3 +112,11 @@ There are no more colors to print.
 ```
 Here is the link to the full solution: [Solution](rainbow_of_color_solution.py)
 
+# Problem: Counting Down
+
+Scenario: Let's say that it's almost New Year's Eve! You want to count down the last 10 seconds of the year by printing each number to the screen, starting from 10, and printing "Happy New Year" when the countdown reaches 0. How would you do this using a queue? What do you need to remember about queues to solve this problem correctly?
+
+Once you've solved the problem, you can check your answer with the solution:
+[Solution](counting_down_solution.py)
+
+[Back to Welcome Page](0-welcome.md)
