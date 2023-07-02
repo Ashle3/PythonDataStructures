@@ -14,7 +14,7 @@ Online shopping is another great example of when queues are used. When a popular
 
 ## Queues in Python
 
-In python, we use a list to create a queue. The process of creating an empty queue is the same as creating an empty list:
+In python, we use a list to create a queue. Therefore, the process of creating an empty queue is the same as creating an empty list:
 
 ```python
 #define an empty queue
@@ -58,3 +58,57 @@ Whichever way you write it is up to you, but they both do the same thing. If you
 ```
 
 The process of dequeueing an item has a performance of O(n). This is because you need to first isolate the item you'd like to remove (O(1)), and then delete it (O(1)). Since both of these processes are O(1) performance, putting them together would make 2(O(n)), which translates to O(n).
+
+# Example: A Rainbow of Colors
+
+Scenario: Let's say we need to print the names of each of the six colors of the rainbow to the screen. How could we do that using a queue?
+
+First, let's write out what we need to do before we start solving the problem: 
+- Create an empty list to store the color names in.
+- Equeue the colors as they appear in the rainbow.
+- Print out the color we just dequeued from the list.
+
+To start off, let's create an empty queue, and then enqueue each of the rainbow colors as they appear on a rainbow. Remember, we need to add them in order, because of the first-in-first-out rule that queues have. 
+
+```python
+colors = []
+
+colors.append("Red")
+colors.append("Orange")
+colors.append("Yellow")
+colors.append("Green")
+colors.append("Blue")
+colors.append("Purple")
+```
+
+Next, we need to think of a way to continuously remove the first item in the queue, and print it out to the screen. To make our code cleaner, it would be best to create a function that passes the colors queue into it as a parameter. To make the code even MORE cleaner, let's make the function recursive as well (continuously call the function within itself until a certain condition is met), so that we only have to call the function once. 
+
+```python
+def print_colors(colors_list):
+    #base case
+    if len(colors_list) == 0:
+        print("There are no more colors to print.")
+    else:
+        #store the first item we remove into a variable
+        removed_first = colors_list.pop(0)
+        #print the variable to the screen
+        print(removed_first)
+        #call the function, by passing in the new colors_list
+        #this function will keep calling until it reaches the base case condition above
+        print_colors(colors_list)
+
+print_colors(colors)
+```
+
+When you run the above code, you should see this:
+```python
+Red
+Orange
+Yellow
+Green 
+Blue  
+Purple
+There are no more colors to print.
+```
+Here is the link to the full solution: [Solution](rainbow_of_color_solution.py)
+
