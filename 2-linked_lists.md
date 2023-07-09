@@ -128,6 +128,8 @@ The process of removing a node from a linked list is generally a lot simpler tha
 
 ![Second to last is tail](images/last_to_tail.png)
 
+**Removing the head and the tail each have an O(1) performance. 
+
 **If the node you are removing is the last node in the list, set both the head and tail to None.
 
 ### Removing from the Middle
@@ -144,19 +146,61 @@ Let's say we are trying to remove the node with a value of 2 from the linked lis
 
 By doing these steps, the linked list essentially squeezes out the node we don't want. 
 
-
-# Linked Lists in Python
-
-There are two ways to create a linked list in python:
-
-- Write a Linked List Class
-- Use python's deque function
-
-## Writing a Linked List Class
-
-By defining a Linked List class, we can easily call methods of that class such as, insert_head or remove_tail, that can help us create and update our Linked list. The structure of the 
+**Removing a node from the middle of a linked list has a performance of O(n).
 
 
+# Python Example
+
+Now, let's practice writing linked lists in python. There are two ways to write linked lists in python:
+
+- Write a LinkedList class
+- Use python's built-in deque function
+
+To help visualize how a linked list works, we will only be writing a LinkedList class for this lesson, although the deque function is still just as effective. 
+
+Before we start writing our class, let's first list each of the methods that are going to be in our class:
+
+LinkedList Class
+- Node Class
+    - initialize the node
+- initialize an empty linked list
+- insert_head
+- insert_tail
+- insert_middle
+- remove_node
+
+## Initialize the Node Class
+
+Let's first initialize the LinkedList class, and the Node class (which will be initialized within the Node class):
+
+```python
+
+class LinkedList:
+
+    class Node:
+        # creates a new node
+        def __init__(self, value):
+            #value will represent the value of the node
+            self.value = value
+            #define empty links
+            self.prev = None
+            self.next = None
+
+```
+As you can see in the code above, the __init__ method creates a new node. The value will be the number that is passed into the function, and the pointers will be set to None, since their values will change with each new node we create. Essentially, this function creates the below image from the pictures above:
+
+![New Node created](images/new_node_single.png)
+
+## Initialize the LinkedList Class
+
+Now that we have written the __init__ function for the Node class, we need to write one for the LinkedList class. This function will be written directly below the Node class, but will not be a part of the Node class. What this __init__ function does, is initialize an empty linked list. The main properties of a linked list that we need to focus on when initializing it, are the values of the head and the tail. Since this linked list is empty, both the head and tail will be set to None.
+
+```python
+def __init__(self):
+    #create an empty linked list
+    self.head = None
+    self.tail = None
+```
 
 
 
@@ -168,18 +212,7 @@ By defining a Linked List class, we can easily call methods of that class such a
 
 
 
-## Inserting into a Linked List
 
-When inserting into a linked list, there are three spots we can insert a new node at:
 
-- The Head
-- The Tail
-- In the Middle
-
-Each of these spots have a different checklist they have to follow in order to implement the insertion.
-
-### Inserting at the Head
-
-These are the steps for inserting a node at the Head of a linked list:
 
 
