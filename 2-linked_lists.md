@@ -101,7 +101,30 @@ Here are the steps for inserting a node into the middle of a linked list. The pr
 
 ![Set next prev](images/set_im3.png)
 
-**Inserting a node into the middle of a linked list has a performance of O(n)
+**Inserting a node into the middle of a linked list has a performance of O(n).
+
+
+## Removing a Node from a Linked List
+
+The process of removing a node from a linked list is generally a lot simpler than inserting a node.
+
+### Removing the Head
+
+### Removing the Tail
+
+### Removing from the Middle
+
+Let's say we are trying to remove the node with a value of 2 from the linked list.
+
+1. Set the "prev" pointer of the node after 2 to equal the node before 2.
+
+![Set prev to prev](images/remove_m_prev.png)
+
+2. Set the "next" pointer of the node before 2 to equal the node after 2. 
+
+![Set next to next](images/remove_m_next.png)
+
+By doing these steps, the linked list essentially squeezes out the node we don't want. 
 
 
 # Linked Lists in Python
