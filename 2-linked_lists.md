@@ -201,7 +201,68 @@ def __init__(self):
     self.head = None
     self.tail = None
 ```
+## Insert Head Function
 
+Taking what we learned from the explanation above, let's write the insert_head function. 
+
+1. Create a new node
+    ```python
+    new_node = LinkedList.Node(value)
+    ```
+    Here, the init function in the Node class is called to create a new node. The value from the insert_head function is passed into the Node init function.
+
+2. Set the "next" pointer of the new node equal to the head
+    ```python
+    new_node.next = self.head
+    ```
+3. Set the the "prev" pointer of the head equal to the new node
+    ```python
+    self.head.prev = new_node
+    ```
+4. Set the head equal to the new node
+    ```python
+    self.head = new_node
+    ```
+
+The function should now look like this:
+```python
+def insert_head(self, value):
+    #create a new node
+    new_node = LinkedList.Node(value)
+
+    new_node.next = self.head
+    self.head.prev = new_node
+    self.head = new_node
+```
+This function is great! One thing we need to consider however, is what will happen if we try to insert a head when the list is empty? We can't set the "next" of a new node to the head if there is no head to begin with. To overcome this problem, let's add an if statement that handles empty linked lists. The finished function should look like this:
+```python
+def insert_head(self, value):
+    #create a new node
+    new_node = LinkedList.Node(value)
+
+    #if the list is empty
+    if self.head is None:
+        #set the head and tail equal to the new node
+        self.head = new_node
+        self.tail = new_node
+    #if it's not empty
+    else:
+        #follow the steps to insert a new head into the list
+        new_node.next = self.head
+        self.head.prev = new_node
+        self.head = new_node
+```
+## Insert Middle Function
+
+Let's take the steps we learned from the examples above, to write a function that inserts a node into the middle of a linked list:
+
+1. Create a new node
+    ```python
+    new_node = LinkedList.Node(value)
+    ```
+2. Set the "prev" pointer of the new node equal to the selected node (the selected node will be a parameter that is passed into the function).
+    ```python
+    
 
 
 
