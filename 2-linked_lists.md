@@ -53,6 +53,28 @@ These are the steps for inserting a node at the Head of a linked list:
 
 ![Set Head Equal to New Node](images/set_head.png)
 
+If the linked list is empty, then set both the head and tail equal to the new node.
+
+### Inserting at the Tail
+
+The steps for inserting a new node at the tail are very similar to the steps for inserting at the head:
+
+1. Create a new node
+
+![Create a new Node](images/new_node.png)
+
+2. Set the "prev" pointer of the new node equal to the tail.
+
+![Set prev to tail](images/set_prev_it.png)
+
+3. Set the "next" pointer of the tail equal to the new node.
+
+![Set next to new node](images/set_next_it.png)
+
+4. Set the tail equal to the new node
+
+![Set tail to new node](images/set_tail_i.png)
+
 # Linked Lists in Python
 
 There are two ways to create a linked list in python:
