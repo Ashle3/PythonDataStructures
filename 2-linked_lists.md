@@ -110,7 +110,25 @@ The process of removing a node from a linked list is generally a lot simpler tha
 
 ### Removing the Head
 
+1. Set the "prev" of the second node to None
+
+![Set prev to none](images/set_prev_none.png)
+
+2. Set the head equal to the second node
+
+![Set second to head](images/second_to_head.png)
+
 ### Removing the Tail
+
+1. Set the "next" of the second to last node to None
+
+![Set next to none](images/next_to_none.png)
+
+2. Set the tail equal to the second to last node
+
+![Second to last is tail](images/last_to_tail.png)
+
+**If the node you are removing is the last node in the list, set both the head and tail to None.
 
 ### Removing from the Middle
 
