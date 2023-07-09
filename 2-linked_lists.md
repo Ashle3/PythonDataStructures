@@ -75,6 +75,35 @@ The steps for inserting a new node at the tail are very similar to the steps for
 
 ![Set tail to new node](images/set_tail_i.png)
 
+**It is important to note that inserting at the head, and inserting at the tail each have a performance of O(1).
+
+### Inserting in the Middle
+
+Here are the steps for inserting a node into the middle of a linked list. The process is a bit more complicated than inserting at the head or tail:
+
+1. Create a new node
+
+![Create a new node](images/new_node.png)
+
+2. Let's say we are trying to insert our new node after the node with a value of 52. To do that, we would need to set the "prev" pointer of the new node equal to 52. 
+
+![Set new prev](images/set_prev_im.png)
+
+3. Then, we need to set the "next" pointer of the new node to equal the "next" pointer of 52's node, which is 8.
+
+![Set new next](images/set_next_im.png)
+
+4. Now, we set the "next" pointer of the new node's "prev" pointer to equal the new node.
+
+![Set prev next](images/set_im2.png)
+
+5. Lastly, we set the "prev" pointer of the new node's "next" pointer equal to the new node. 
+
+![Set next prev](images/set_im3.png)
+
+**Inserting a node into the middle of a linked list has a performance of O(n)
+
+
 # Linked Lists in Python
 
 There are two ways to create a linked list in python:
