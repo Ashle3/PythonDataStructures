@@ -31,6 +31,90 @@ There are also linked lists that are bi-directional, meaning that each node has 
 
 ![Doubly Linked List Example](images/doubly_linked.png)
 
+
+## Creating a Linked List
+
+In python, there are two ways to create a linked list. The first way is to use the __deque__ container from python's collection library. While we will not be going over deque in this lesson, it is still a great tool to use. Below is a helpful link from the website __Geeks for Geeks__ that goes over the basics of the deque container:
+
+[Python's Deque Basics](https://www.geeksforgeeks.org/python-collections-module/?ref=lbp#deque)
+
+The second way to create a linked list in python, is to write a Linked List class. This class will contain methods, or functions, that are necessary to create a linked list. These methods would have the ability to:
+- create an empty list
+- create a new node 
+- insert or delete a node from the list 
+
+In this tutorial, we will go over each step of how to create, insert, and delete from, a linked list.
+
+## Creating an Empty Linked List
+
+When defining a regular list in python, we simply have to set a variable equal to empty brackets.
+
+```python
+# defining an empty regular list
+new_list = []
+```
+
+With linked lists, it's a little more complex. What makes a linked list different from a regular list, is that the head and tail need to be defined when the linked list is initialized. Because our list will be empty, there will not be a head or a tail to define. So, in our init method in the LinkedList class, we need to set the head and the tail equal to None.
+
+```python
+# defining an empty linked list
+def __init__(self):
+    self.head = None
+    self.tail = None
+```
+Now, whenever we call the LinkedList() class, a new, empty linked list will be created.
+
+## Creating a New Node
+Before we learn how to insert nodes into a linked list, we first need to learn about the properties of a node. When comparing the two, nodes in a linked list are more complex than items in a regular list due to the fact that nodes have two pointers (previous and next), as well as a value, while items just have a value. Because each of these two pointers have their own value, there needs to be a way to insert all three values at once into the list. 
+
+![Image of a Node](images/new_node_single.png)
+
+The best way to do this is to create a node object that contains all three properties:
+- The value (pink)
+- The value of the "next" pointer (green)
+- The value of the "previous" pointer (orange)
+
+To do this, we need to create a Node class that can initialize this object when called. Since nodes are a property of a linked list, we need to define the Node class inside the LinkedList class:
+
+```python
+# initialize the LinkedList class
+class LinkedList:
+    # initialize the Node class
+    class Node:
+```
+The init function in the Node class is where we will define the three properties of a node:
+
+```python
+class Node:
+    def __init__(self, value):
+        # define the main value
+        self.value = value
+        # define the value of "next"
+        self.next = None
+        # define the value of "prev"
+        self.prev = None
+```
+Since we don't yet know where in the linked list this node will be, we set the pointers to None. These can be changed as we update the list.
+
+Up to this point, we have defined the LinkedList and the Node classes, and have written each of their init functions. Your code should look similar to this:
+
+```python
+class LinkedList:
+    class Node:
+        def __init__(self, value):
+        # define the main value
+        self.value = value
+        # define the value of "next"
+        self.next = None
+        # define the value of "prev"
+        self.prev = None
+    
+    # creating an empty linked list
+    def __init__(self):
+        self.head = None
+        self.tail = None
+```
+
 ## Inserting into a Linked List
 
 When inserting into a linked list, there are three spots we can insert a new node at:
