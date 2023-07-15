@@ -54,7 +54,7 @@ When defining a regular list in python, we simply have to set a variable equal t
 new_list = []
 ```
 
-With linked lists, it's a little more complex. What makes a linked list different from a regular list, is that the head and tail need to be defined when the linked list is initialized. Because our list will be empty, there will not be a head or a tail to define. So, in our init method in the LinkedList class, we need to set the head and the tail equal to None.
+With linked lists, it's a little more complex. What makes a linked list different from a regular list, is that it has a head and tail. Whenever we initialize a new linked list, the head and tail need to be defined. Because our list will be empty, there will not be a head or a tail to define. So, in our init method in the LinkedList class, we need to set the head and the tail equal to None.
 
 ```python
 # defining an empty linked list
@@ -65,7 +65,7 @@ def __init__(self):
 Now, whenever we call the LinkedList() class, a new, empty linked list will be created.
 
 ## Creating a New Node
-Before we learn how to insert nodes into a linked list, we first need to learn about the properties of a node, and how to create one. When comparing the two, nodes in a linked list are more complex than items in a regular list due to the fact that nodes have two pointers (previous and next), as well as a value, while items in a regular list just have a value. Because each of these two pointers have their own value, there needs to be a way to insert all three values at once into the list. 
+Before we learn how to insert nodes into a linked list, we first need to learn about the properties of a node, and how to create one. When comparing the two, nodes in a linked list are more complex than items in a regular list, due to the fact that nodes have two pointers (previous and next), as well as a value, while items in a regular list just have a value. Because each of these two pointers have their own value, there needs to be a way to insert all three values at once into the list. 
 
 ![Image of a Node](images/new_node_single.png)
 
@@ -128,7 +128,7 @@ Each of these spots have a different checklist to follow in order to correctly i
 
 ### Inserting at the Head
 
-Let's start by defining an insert_head function in our LinedList class. We will want to pass in a value as a parameter that will be used to create our node:
+Let's start by defining an insert_head function in our LinkedList class. We will want to pass in a value as a parameter that will be used to create our node:
 
 ```python
 def insert_head(self, value):
@@ -141,23 +141,23 @@ To write the rest of the function, we must know that there are 4 steps for inser
 
 ![Create a new node](images/new_node.png)
 
-In the example picture above, we see that we have a linked list already populated with 3 nodes: a head, a tail, and a node in the middle. What we want to do is insert a new node, with a value of 2, at the front of the linked list, or the head. For our first step, we need to create a node that can be inserted into the list. Luckily for us, we have already created a Node class that does just this; we just need to call it and store it into a variable:
+In the example picture above, we see that we have a linked list already populated with 3 nodes: a head, a tail, and a node in the middle. What we want to do is insert a new node, with a value of 2, at the front of the linked list, or the head. For our first step, we need to create a node that can be inserted into the list. Luckily for us, we have already created a Node class that does just this; we just need to call the class and store it into a variable:
 
 ```python
 # create a new node by calling the Node class
 new_node = LinkedList.Node(value)
 ```
-Since the Node class is a property of the LinkedList class, we must first call the LinkedList class, and then the Node class as shown above. The value we pass into the Node class is the same as the value we are passing into the insert_head function. 
+Since the Node class is a property of the LinkedList class, we must first call the LinkedList class, and then the Node class as shown above. The value we pass into the Node class is the value parameter of the insert_head function. 
 
 2. Set the "next" pointer of the new node equal to the current head.
 
 When we created this new node in the line above, the node's pointers were both set to None, due to the default settings of the Node class. Now, since we are inserting this new node at the head, we want its pointers to reflect that of a head node. 
 
-To do this, we will leave the "prev" pointer set to None (since the head node doesn't have anything before it), and we will set the "next" pointer of the new node equal to the list's current head, as shown below. This will essentially "link" the node to the current head.
+To do this, we will leave the "prev" pointer set to None (since the head node doesn't have anything before it), and we will set the "next" pointer of the new_node equal to the list's current head, as shown below. This will essentially "link" the new_node to the current head.
 
 ![Set Next Equal to Head](images/set_next_ih.png)
 
-To do this in python, we will set the new_node's property of ".next" equal to the class's head, "self.head".
+To do this in python, we will set the new_node's property of ".next" equal to the linked list's head, "self.head".
 
 ```python
 #step 2
@@ -319,7 +319,7 @@ As of now, 8 is the same as our current_node, 52's, "next" pointer (current_node
 new_node.next = current_node.next
 ```
 
-4. Set the value of the current_node's "next" pointer equal to the new_node.
+4. Set the "prev" pointer of the value of the current_node's "next" pointer equal to the new_node.
 
 Now that the new_node is in its new place, we need to change the surrounding nodes to reflect that. As we established in the previous step, the current_node's (52) "next" pointer is equal to 8. Since this node, 8, is now after the new_node we just inserted, we need to change its "prev" pointer to equal to the new node.
 
