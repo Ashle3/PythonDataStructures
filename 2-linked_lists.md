@@ -128,7 +128,7 @@ Each of these spots have a different checklist to follow in order to correctly i
 
 ### Inserting at the Head
 
-Let's start by defining an insert_head function in our LinkedList class. We will want to pass in a value as a parameter that will be used to create our node:
+Let's start by defining an insert_head function in our LinkedList class that will insert a node at the head, or beginning of the linked list. We will want to pass in a value as a parameter that will be used to create our node:
 
 ```python
 def insert_head(self, value):
@@ -137,23 +137,23 @@ def insert_head(self, value):
 
 To write the rest of the function, we must know that there are 4 steps for inserting a node at the Head of a linked list:
 
-1. Create a new node
+__1. Create a new node__
 
 ![Create a new node](images/new_node.png)
 
-In the example picture above, we see that we have a linked list already populated with 3 nodes: a head, a tail, and a node in the middle. What we want to do is insert a new node, with a value of 2, at the front of the linked list, or the head. For our first step, we need to create a node that can be inserted into the list. Luckily for us, we have already created a Node class that does just this; we just need to call the class and store it into a variable:
+In the example picture above, we see that we have a linked list already populated with 3 nodes: a head, a tail, and a node in the middle. What we want to do is insert a new node, with a value of 2, at the front of the linked list, or the head. For our first step, we need to first create a node that can be inserted into the list. Luckily for us, we have already created a Node class that does just this; we just need to call the class and store it into a variable:
 
 ```python
 # create a new node by calling the Node class
 new_node = LinkedList.Node(value)
 ```
-Since the Node class is a property of the LinkedList class, we must first call the LinkedList class, and then the Node class as shown above. The value we pass into the Node class is the value parameter of the insert_head function. 
+Since the Node class is a property of the LinkedList class, we must first call the LinkedList class, and then the Node class as shown above. The value we pass into the Node class is the value parameter of the insert_head function we are currently writing. 
 
-2. Set the "next" pointer of the new node equal to the current head.
+__2. Set the "next" pointer of the new node equal to the current head.__
 
 When we created this new node in the line above, the node's pointers were both set to None, due to the default settings of the Node class. Now, since we are inserting this new node at the head, we want its pointers to reflect that of a head node. 
 
-To do this, we will leave the "prev" pointer set to None (since the head node doesn't have anything before it), and we will set the "next" pointer of the new_node equal to the list's current head, as shown below. This will essentially "link" the new_node to the current head.
+To do this, we will leave the "prev" pointer set to None (since a head node doesn't have anything before it), and we will set the "next" pointer of the new_node equal to the list's current head, as shown below. This will essentially "link" the new_node to the current head.
 
 ![Set Next Equal to Head](images/set_next_ih.png)
 
@@ -164,7 +164,7 @@ To do this in python, we will set the new_node's property of ".next" equal to th
 new_node.next = self.head
 ```
 
-3. Set the "prev" pointer of the current head equal to the new node.
+__3. Set the "prev" pointer of the current head equal to the new node.__
 
 Since the current head now has node before it, its "prev" pointer should now equal that new node, the one we just created. 
 
@@ -177,7 +177,7 @@ In python, we will change the ".prev" property of the current head to equal the 
 self.head.prev = new_node
 ```
 
-4. Set the head equal to the new node
+__4. Set the head equal to the new node__
 
 When referring to our picture example so far, self.head is still equal to the node with a value of 25. This needs to change, since the new head is the node with a value of 2.
 
@@ -194,13 +194,13 @@ After following these 4 steps, your current insert_head function should look lik
 
 ```python
 def insert_head(self, value):
-    #step 1
+    #step 1: Create a new node
     new_node = LinkedList.Node(value)
-    #step 2
+    #step 2: Set the "next" pointer of the new node equal to the current head.
     new_node.next = self.head
-    #step 3
+    #step 3: Set the "prev" pointer of the current head equal to the new node.
     self.head.prev = new_node
-    #step 4
+    #step 4: Set the head equal to the new node
     self.head = new_node
 ```
 
@@ -216,7 +216,7 @@ Let's create an if statement in our insert_head function that handles this excep
 
 ```python
 def insert_head(self, value):
-    #step 1
+    #step 1: Create a new node
     new_node = LinkedList.Node(value)
     
     # if there is no head (meaning the list is empty)
@@ -227,31 +227,30 @@ def insert_head(self, value):
     # if there is a head (meaning there is at least one node in the list)
     else:
         # follow the rest of the steps to insert a node at the head
-        
-        #step 2
+        #step 2: Set the "next" pointer of the new node equal to the current head.
         new_node.next = self.head
-        #step 3
+        #step 3: Set the "prev" pointer of the current head equal to the new node.
         self.head.prev = new_node
-        #step 4
+        #step 4: Set the head equal to the new node
         self.head = new_node 
 ```
 ### Inserting at the Tail
 
 The steps for inserting a new node at the tail are very similar to the steps for inserting at the head. We just need to consider the small changes that make inserting at the tail slightly different from inserting at the head:
 
-1. Create a new node
+__1. Create a new node__
 
 ![Create a new Node](images/new_node.png)
 
-2. Set the "prev" pointer of the new node equal to the tail.
+__2. Set the "prev" pointer of the new node equal to the tail.__
 
 ![Set prev to tail](images/set_prev_it.png)
 
-3. Set the "next" pointer of the tail equal to the new node.
+__3. Set the "next" pointer of the tail equal to the new node.__
 
 ![Set next to new node](images/set_next_it.png)
 
-4. Set the tail equal to the new node
+__4. Set the tail equal to the new node__
 
 ![Set tail to new node](images/set_tail_i.png)
 
@@ -267,22 +266,22 @@ We will now learn how to insert a new node into the middle of the list. The proc
 
 When defining the insert_middle function, we need to pass in 2 parameters instead of 1:
 
-- current_value
+- value
 - new_value
 
-The __current_value__ represents a value already in the linked list that we want to insert our new node after. The __new_value__ represents the main value of our new node.
+The __value__ represents a value already in the linked list that we want to insert our new node after. The __new_value__ represents the main value of the new node we are creating.
 
 ```python
-def insert_middle(self, current_value, new_value):
+def insert_middle(self, value, new_value):
 ```
 
-Now, let's go over the steps of inserting a node into the middle of the list. To make explanations simpler when writing our function, we will store the __current_value__ parameter into a variable named __current_node__:
+Now, let's go over the steps of inserting a node into the middle of the list. To make our __value__ parameter easier to work with, let's store it into a variable named __current_node__:
 
 ```python
-current_node = current_value
+current_node = value
 ```
 
-1. Create a new node
+__1. Create a new node__
 
 ![Create a new node](images/new_node.png)
 
@@ -293,7 +292,7 @@ This step is exactly the same as the one in the insert_head function. We simply 
 new_node = LinkedList.Node(new_value)
 ```
 
-2. Set the "prev" pointer of the new_node equal to the current_node.
+__2. Set the "prev" pointer of the new_node equal to the current_node.__
 
 Let's say our current_node, or the node we are trying to insert our new node after, is the node with a value of 52. If we want our new_node to come after 52, we need to set the "prev" pointer of the new_node equal to 52 as shown below:
 
@@ -306,22 +305,22 @@ In python, we would set new_node.prev equal to the current_node:
 new_node.prev = current_node
 ```
 
-3. Set the "next" pointer of the new_node equal to the "next" pointer of the current_node
+__3. Set the "next" pointer of the new_node equal to the "next" pointer of the current_node__
 
 In our example, we are essentially squeezing our new_node of 2, in between nodes 52 and 8. We have already set our new_node's "prev" pointer to 52, now we need to set its "next" pointer equal to 8.
 
 ![Set new next](images/set_next_im.png)
 
-As of now, 8 is the same as our current_node, 52's, "next" pointer (current_node.next). To complete this step, we will set the new_node's next (new_node.next) equal to the current_node's next (current_node.next), as shown below:
+As of now, 8 is the same as our current_node, 52's, "next" pointer (current_node.next). To complete this step, we will set the new_node's next pointer (new_node.next) equal to the current_node's next pointer (current_node.next), as shown below:
 
 ```python
 #step 3
 new_node.next = current_node.next
 ```
 
-4. Set the "prev" pointer of the value of the current_node's "next" pointer equal to the new_node.
+__4. Set the "prev" pointer of the value of the current_node's "next" pointer equal to the new_node.__
 
-Now that the new_node is in its new place, we need to change the surrounding nodes to reflect that. As we established in the previous step, the current_node's (52) "next" pointer is equal to 8. Since this node, 8, is now after the new_node we just inserted, we need to change its "prev" pointer to equal to the new node.
+This step is a bit of a word jumble, but let's go over it. Now that the new_node is in its new place, we need to change the surrounding nodes to reflect that. As we established in the previous step, the current_node's (52) "next" pointer is equal to 8. Since this node, 8, is now after the new_node we just inserted, we need to change its "prev" pointer to equal to the new node.
 
 ![Set prev next](images/set_im3.png)
 
@@ -330,39 +329,93 @@ We can access the "prev" pointer of the node with the value of 8, by first acces
 
 ```python
 #step 4
-current_node.next.prev = current_node
+current_node.next.prev = new_node
 ```
 
-5. Set the "next" of the current_node equal to the new_node. 
+__5. Set the "next" of the current_node equal to the new_node.__
 
-Lastly, we need to change the current_node's "next" pointer, which is still 8, equal to the new_node, 2.
+Lastly, we need to change the current_node's "next" pointer, which is still 8, equal to the new_node, 2. The python example is shown below: 
 
 ![Set next prev](images/set_im2.png)
 
 ```python
 #step 5
-current_node.next = current_node
+current_node.next = new_node
 ```
 Up to this point, your insert_middle function should look similar to this:
 
 ```python
-def insert_middle(self, current_value, new_value):
-    # store the current_value into a variable
-    current_node = current_value
+def insert_middle(self, value, new_value):
+    # store the current_value into a variable named current_node
+    current_node = value
     
-    #step 1
+    #step 1: create a new node
     new_node = LinkedList.Node(new_value)
-    #step 2
+    #step 2: Set the "prev" pointer of the new_node equal to the current_node.
     new_node.prev = current_node
-    #step 3
+    #step 3: Set the "next" pointer of the new_node equal to the "next" pointer of the current_node
     new_node.next = current_node.next
-    #step 4
-    current_node.next.prev = current_node
-    #step 5
-    current_node.next = current_node
+    #step 4: Set the "prev" pointer of the value of the current_node's "next" pointer equal to the new_node.
+    current_node.next.prev = new_node
+    #step 5: Set the "next" of the current_node equal to the new_node.
+    current_node.next = new_node
 ```
 
-Exceptions go here.
+### Fixing Limitations
+
+While the function above works well, it does have some limitations we need to fix. For example, what happens if the list is empty? How do we search for the value parameter in the linked list? What do we do if we can't find the value parameter in the linked list? To answer these questions, let's start editing our insert_middle function so that it can handle all of these exceptions. 
+
+Our first problem we run into is that we need to search for the value parameter in the linked list. In our example pictures above, we had the benefit of saying "Okay, let's insert our new node after 52." Making this happen in python is not as simple as that. In reality, we don't know where our value parameter is in the list, or if it's even in the list at all! To find the value, we need to iterate over each node in the linked list, and check to see if its value matches the value we are trying to find. 
+
+As with any form of iteration in python, we need to start at the beginning. In our function, let's change the current_node variable, to equal the linked list's head (self.head):
+
+```python
+def insert_middle(self, value, new_value):
+   
+    current_node = self.head #<<----------
+    
+    new_node = LinkedList.Node(new_value)
+    new_node.prev = current_node
+    new_node.next = current_node.next
+    current_node.next.prev = new_node
+    current_node.next = new_node
+```
+Next, let's create an if statement that checks to see if the current_node's value is equal to the value we're looking for. If it is equal to the value we're looking for, then perform the steps to insert a new node after it. If it is NOT equal to the value we're looking for, then move on to the next node in the list, by setting current_node equal to the value of the current_node's "next" pointer (current_node.next).
+
+```python
+def insert_middle(self, value, new_value):
+
+    current_node = self.head
+    
+    if current_node.value == value: #<<----------
+        new_node = LinkedList.Node(new_value)
+        new_node.prev = current_node
+        new_node.next = current_node.next
+        current_node.next.prev = new_node
+        current_node.next = new_node
+    else:
+        current_node = current_node.next #<<----------
+```
+We now have a function that iterates through each node in the linked list, and checks to see if the current_node's value is equal to the value we are searching for. But happens if we reach the end of the list, and the current_node's "next" pointer is empty?
+
+To fix this, we can put our if statement inside of a while loop, so that it only runs while there are still nodes left in the list. When the current node is equal to nothing, we will know we have reached the end of the list, and our while loop will stop running. 
+
+```python
+def insert_middle(self, value, new_value):
+
+    current_node = self.head
+    
+    while current_node is not None: #<<----------
+        if current_node.value == value: 
+            new_node = LinkedList.Node(new_value)
+            new_node.prev = current_node
+            new_node.next = current_node.next
+            current_node.next.prev = new_node
+            current_node.next = new_node
+        else:
+            current_node = current_node.next 
+```
+While our function currently handles most of our limitations, there is still one more thing we need to add to make it run more efficiently. Right now, our function inserts a new node after a specific node in the linked list. But, what if the specific node we are looking for is the tail? How will our steps need to change then? Luckily for us, we already have a function that handles this (insert_tail). Even though we haven't written our insert_tail function yet, we can still call it in this function, so that it will be ready to use once the insert_tail function is written. 
 
 ### Big O Notation
 
@@ -371,7 +424,7 @@ It is important to note that inserting a node into the middle of a linked list h
 
 ## Removing a Node from a Linked List
 
-The process of removing a node from a linked list is generally a lot simpler than inserting a node.
+The process of removing a node from a linked list is generally a lot simpler than inserting a node, as there are less steps to follow.
 
 ### Removing the Head
 
