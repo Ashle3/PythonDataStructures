@@ -35,9 +35,29 @@ Now we will be comparing 2 to 1. Is 2 less than or greater than 1? Since 2 is gr
 
 ![2 placed in bst](timages/bst_2_placement.png)
 
-This is the process we have to go through every time we insert a node into a binary search tree. It can become unbalanced if we're not careful.
+This is the process we have to go through every time we insert a node into a binary search tree. 
 
-## Balanced vs Unbalanced Binary Search Tree
+## Balanced Binary Search Tree
+
+The tree in the example above is what's known as a __balanced binary search tree__. What this means is that the difference in height between the left subtree and the right subtree is less than 2. We can find the height of a tree by counting from the lowest leaf, back up to the root. In the example above, we calculate the height of the left subtree by starting at 2, the lowest leaf, and count up to the root node 5. 
+
+![Finding the height of the left subtree](timages/left_subtree_height.png)
+
+As you can see, we have counted 4 nodes, meaning that the height of the left subtree is 4.
+
+To find the height of the right subtree, we do the same by starting at 9, the lowest leaf in that subtree, and count back up to the root node.
+
+![Finding the height of the right subtree](timages/right_subtree_height.png)
+
+We have counted 3 nodes, so the height of the right subtree is 3.
+
+Now, we calculate the height of the entire tree by subtracting 3, the height of the right subtree, from 4, the height of the left subtree, getting 1 as a result. Since the difference in height between the two subtrees is less than 2, we can conclude that this tree is a balanced binary search tree. 
+
+But what if the tree is unbalanced? If we're not careful, this could happen easily. Going back to our example, if we were to add a node of 1.5 to the left of node 2, the tree would become unbalanced, since the height of the left subtree is 2 nodes greater than the height of the right subtree. 
+
+![Unbalanced bst](timages/unbalanced_bst.png)
+
+This can be fixed using the AVL algorithm which switches up the numbers. 
 
 I will explain and show how a bst can become unbalanced. 
 
