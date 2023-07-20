@@ -15,13 +15,25 @@ A __binary tree__ is a tree in which each node can link to no more than two othe
 
 There is one more term to define, and that is __subtree__. When looking at a family tree, you might see a parent displayed with 2 kids. At least one of those 2 kids might have their own kids displayed in the tree as well. In this situation, the child that has their own kids is a subtree. A __subtree__ is essentially a child node, that is a parent to other nodes. As you can see in the image above, the nodes within the red box make up a subtree. 
 
-It is also important to note that nodes can link to other nodes, either before or after them, similar to a linked list. 
+It is also important to note that nodes can link to other nodes, either before or after them, similar to a linked list. The red and black arrows in the image above represent this.
 
 ## Binary Search Tree
 
-Define what a Binary Search Tree is (state how there are rules to inserting into a binary search tree; lower goes on the left, higher goes on the right).
+A __binary search tree__ (also known as a BST) is the same as a binary tree, except for the fact that there are rules to be followed when entering a new node. When entering a new node into a binary search tree (BST), the value of the node being entered is compared to the value of the root node (**if there isn't a root node, the new node will become the root node*). If the value of the new node is __less__ than the root node, it goes into the __left__ subtree. If the new node is __greater__ than the root node, it will be placed into the __right__ subtree. Then, depending on whether the new node has been sent to the left or the right subtree, the new node is compared to the root of that subtree, and the process starts all over again until an empty spot can be found. 
 
-Will also have a diagram displaying this.
+Take the following tree for example: 
+
+![Binary Search Tree](timages/bst.png)
+
+Let's say that we wanted to insert the node with a value of 2 into the binary search tree. We would first have to compare 2 to the root node, which is 5. Is 2 greater than or less than 5? Since 2 is less than 5, we would start searching in the left subtree.
+
+At this point, the process starts all over again, and we compare 2 to 3. Is 2 less than or greater than 3? Since it is less than, we would again look into the left subtree.
+
+Now we will be comparing 2 to 1. Is 2 less than or greater than 1? Since 2 is greater than 1, it will be going into the right sub tree this time. And, since there isn't a node in 1's right pointer, we will insert 2 there.
+
+![2 placed in bst](timages/bst_2_placement.png)
+
+This is the process we have to go through every time we insert a node into a binary search tree.
 
 ## Balanced vs Unbalanced Binary Search Tree
 
