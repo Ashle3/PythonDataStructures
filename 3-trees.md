@@ -1,8 +1,10 @@
 # Trees
 
-Trees are very similar to linked lists in that they both have nodes, and that each node has pointers. What makes them different however, is that trees can connect to multiple different nodes, while linked lists cannot. To help visualize this, think of the structure of a linked list as a chain; each link in the chain can only connect to the link directly in front of it. This singular linkage gives a chain its linear structure, essentially making it one dimensional. With this still in mind, let's think of the structure of a tree as, well, a branch on a tree. A tree branch isn't limited to a linear structure like a chain is. Instead, a tree branch can break off into multiple branches, those branches breaking off into their own branches, and so on and so forth. What we have now, is a structure that's more complex both visually and functionally. 
+Trees are very similar to linked lists in that they both have nodes, and that each node has pointers. What makes them different however, is that trees can connect to multiple different nodes, while linked lists cannot. To help visualize this, think of the structure of a linked list as a chain; each link in the chain can only connect to the link directly in front of it. This singular linkage gives a chain its linear structure, essentially making it one dimensional. 
 
-In this lesson, we will be reviewing 3 different types of trees:
+With this still in mind, let's think of the structure of a tree as, well, a branch on a tree. A tree branch isn't limited to a linear structure like a chain is. Instead, a tree branch can break off into multiple branches, those branches breaking off into their own branches, and so on and so forth. What we have now, is a structure that's more complex both visually and functionally. 
+
+In this lesson, we will be reviewing 3 different types of data structure trees:
 - Binary Tree
 - Binary Search Tree (BST)
 - Balanced Binary Search Tree
@@ -19,7 +21,7 @@ It is also important to note that nodes can link to other nodes, either before o
 
 ## Binary Search Tree
 
-A __binary search tree__ (also known as a BST) is the same as a binary tree, except for the fact that there are rules to be followed when entering a new node. When entering a new node into a binary search tree (BST), the value of the node being entered is compared to the value of the root node (**if there isn't a root node, the new node will become the root node*). If the value of the new node is __less__ than the root node, it goes into the __left__ subtree. If the new node is __greater__ than the root node, it will be placed into the __right__ subtree. Then, depending on whether the new node has been sent to the left or the right subtree, the new node is compared to the root of that subtree, and the process starts all over again until an empty spot can be found. 
+A __binary search tree__ (also known as a BST) is the same as a binary tree, except for the fact that there are rules to be followed when entering a new node. When entering a new node into a binary search tree (BST), the value of the node being entered is compared to the value of the root node (**if there isn't a root node, then the new node will become the root node*). If the value of the new node is __less__ than the root node, it goes into the __left__ subtree. If the new node is __greater__ than the root node, it will be placed into the __right__ subtree. Then, depending on whether the new node has been sent to the left or the right subtree, the new node is compared to the root of that subtree, and the process starts all over again until an empty spot can be found. 
 
 Take the following tree for example: 
 
@@ -33,7 +35,7 @@ Now we will be comparing 2 to 1. Is 2 less than or greater than 1? Since 2 is gr
 
 ![2 placed in bst](timages/bst_2_placement.png)
 
-This is the process we have to go through every time we insert a node into a binary search tree.
+This is the process we have to go through every time we insert a node into a binary search tree. It can become unbalanced if we're not careful.
 
 ## Balanced vs Unbalanced Binary Search Tree
 
