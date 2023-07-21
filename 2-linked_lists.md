@@ -417,6 +417,29 @@ def insert_middle(self, value, new_value):
 ```
 While our function currently handles most of our limitations, there is still one more thing we need to add to make it run more efficiently. Right now, our function inserts a new node after a specific node in the linked list. But, what if the specific node we are looking for is the tail? How will our steps need to change then? Luckily for us, we already have a function that handles this (insert_tail). Even though we haven't written our insert_tail function yet, we can still call it in this function, so that it will be ready to use once the insert_tail function is written. 
 
+Within the if portion of our if statement, let's create another if statement that handles the insertion if the current node is the tail. 
+
+```python
+def insert_middle(self, value, new_value):
+
+    current_node = self.head
+    
+    while current_node is not None:
+        if current_node.value == value: 
+            if current_node == self.tail: #<<----------
+                self.insert_tail(new_value)
+            else:
+                new_node = LinkedList.Node(new_value)
+                new_node.prev = current_node
+                new_node.next = current_node.next
+                current_node.next.prev = new_node
+                current_node.next = new_node
+            return # put return here so we can exit the function once we have inserted our new node
+        else:
+            current_node = current_node.next
+```
+We now have a properly working function that inserts a node into the middle of the list!
+
 ### Big O Notation
 
 It is important to note that inserting a node into the middle of a linked list has a performance of O(n).
@@ -435,6 +458,22 @@ The process of removing a node from a linked list is generally a lot simpler tha
 2. Set the head equal to the second node
 
 ![Set second to head](images/second_to_head.png)
+
+Here are what these steps look like when written as a function:
+
+```python
+def remove_head(self):
+        # this is the code that is run if there is only one node in the list
+        if self.head == self.tail:
+            self.head = None
+            self.tail = None
+        # these are the steps we just went over
+        elif self.head is not None:
+            #step 1: Set the "prev" of the second node to None
+            self.head.next.prev = None
+            #step 2: Set the head equal to the second node
+            self.head = self.head.next  
+```
 
 ### Removing the Tail
 
@@ -462,125 +501,34 @@ Let's say we are trying to remove the node with a value of 2 from the linked lis
 
 ![Set next to next](images/remove_m_next.png)
 
-By doing these steps, the linked list essentially squeezes out the node we don't want. 
+By doing these steps, the linked list essentially squeezes out the node we don't want. This is what the function would look like written in python.
+
+```python
+def remove(self, value):
+        """
+        Remove the first node that contains 'value'.
+        """
+        curr = self.head #start at the head
+        while curr is not None: #while there is a value in the node
+            if curr.data == value: #if the current node's data matches the value we're looking for
+                #if the value is the tail, we can call the remove tail function to remove it
+                if curr == self.tail:
+                    self.remove_tail()
+                elif curr == self.head: #if the value is the head, then we can call the remove head function to remove it
+                    self.remove_head()
+                else:
+                    #set the next node's preveious link to the node before the current node
+                    curr.next.prev = curr.prev
+                    #set the node before the current node's 'next' link to the node after the current node
+                    curr.prev.next = curr.next
+                return #exit the function after you delete the matching node
+            curr = curr.next #go to the next node's value if you the current node's value is not a match
+```
 
 **Removing a node from the middle of a linked list has a performance of O(n).
 
 
-# Python Example
 
-Now, let's practice writing linked lists in python. There are two ways to write linked lists in python:
-
-- Write a LinkedList class
-- Use python's built-in deque function
-
-To help visualize how a linked list works, we will only be writing a LinkedList class for this lesson, although the deque function is still just as effective. 
-
-Before we start writing our class, let's first list each of the methods that are going to be in our class:
-
-LinkedList Class
-- Node Class
-    - initialize the node
-- initialize an empty linked list
-- insert_head
-- insert_tail
-- insert_middle
-- remove_node
-
-## Initialize the Node Class
-
-Let's first initialize the LinkedList class, and the Node class (which will be initialized within the Node class):
-
-```python
-
-class LinkedList:
-
-    class Node:
-        # creates a new node
-        def __init__(self, value):
-            #value will represent the value of the node
-            self.value = value
-            #define empty links
-            self.prev = None
-            self.next = None
-
-```
-As you can see in the code above, the __init__ method creates a new node. The value will be the number that is passed into the function, and the pointers will be set to None, since their values will change with each new node we create. Essentially, this function creates the below image from the pictures above:
-
-![New Node created](images/new_node_single.png)
-
-## Initialize the LinkedList Class
-
-Now that we have written the __init__ function for the Node class, we need to write one for the LinkedList class. This function will be written directly below the Node class, but will not be a part of the Node class. What this __init__ function does, is initialize an empty linked list. The main properties of a linked list that we need to focus on when initializing it, are the values of the head and the tail. Since this linked list is empty, both the head and tail will be set to None.
-
-```python
-def __init__(self):
-    #create an empty linked list
-    self.head = None
-    self.tail = None
-```
-## Insert Head Function
-
-Taking what we learned from the explanation above, let's write the insert_head function. 
-
-1. Create a new node
-    ```python
-    new_node = LinkedList.Node(value)
-    ```
-    Here, the init function in the Node class is called to create a new node. The value from the insert_head function is passed into the Node init function.
-
-2. Set the "next" pointer of the new node equal to the head
-    ```python
-    new_node.next = self.head
-    ```
-3. Set the the "prev" pointer of the head equal to the new node
-    ```python
-    self.head.prev = new_node
-    ```
-4. Set the head equal to the new node
-    ```python
-    self.head = new_node
-    ```
-
-The function should now look like this:
-```python
-def insert_head(self, value):
-    #create a new node
-    new_node = LinkedList.Node(value)
-
-    new_node.next = self.head
-    self.head.prev = new_node
-    self.head = new_node
-```
-This function is great! One thing we need to consider however, is what will happen if we try to insert a head when the list is empty? We can't set the "next" of a new node to the head if there is no head to begin with. To overcome this problem, let's add an if statement that handles empty linked lists. The finished function should look like this:
-```python
-def insert_head(self, value):
-    #create a new node
-    new_node = LinkedList.Node(value)
-
-    #if the list is empty
-    if self.head is None:
-        #set the head and tail equal to the new node
-        self.head = new_node
-        self.tail = new_node
-    #if it's not empty
-    else:
-        #follow the steps to insert a new head into the list
-        new_node.next = self.head
-        self.head.prev = new_node
-        self.head = new_node
-```
-## Insert Middle Function
-
-Let's take the steps we learned from the examples above, to write a function that inserts a node into the middle of a linked list:
-
-1. Create a new node
-    ```python
-    new_node = LinkedList.Node(value)
-    ```
-2. Set the "prev" pointer of the new node equal to the selected node (the selected node will be a parameter that is passed into the function).
-    ```python
-    
 
 
 
