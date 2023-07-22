@@ -116,7 +116,7 @@ class LinkedList:
         self.tail = None
 ```
 
-## Inserting into a Linked List
+## INSERTING into a Linked List
 
 Now, let's start inserting nodes into our linked list. When inserting into a linked list, there are three spots we can insert a new node at:
 
@@ -126,7 +126,7 @@ Now, let's start inserting nodes into our linked list. When inserting into a lin
 
 Each of these spots have a different checklist to follow in order to correctly implement the insertion. In our LinkedList class, it would be ideal to create a function for each of these spots (i.e., insert_head, insert_tail, insert_middle) 
 
-### Inserting at the Head
+### Inserting at the HEAD
 
 Let's start by defining an insert_head function in our LinkedList class that will insert a node at the head, or beginning of the linked list. We will want to pass in a value as a parameter that will be used to create our node:
 
@@ -166,7 +166,7 @@ new_node.next = self.head
 
 __3. Set the "prev" pointer of the current head equal to the new node.__
 
-Since the current head now has node before it, its "prev" pointer should now equal that new node, the one we just created. 
+Since the current head now has a node before it, its "prev" pointer should now equal that new node, the one we just created. 
 
 ![Set Prev Equal to New Node](images/set_prev_ih.png)
 
@@ -234,7 +234,7 @@ def insert_head(self, value):
         #step 4: Set the head equal to the new node
         self.head = new_node 
 ```
-### Inserting at the Tail
+### Inserting at the TAIL
 
 The steps for inserting a new node at the tail are very similar to the steps for inserting at the head. We just need to consider the small changes that make inserting at the tail slightly different from inserting at the head:
 
@@ -260,7 +260,7 @@ You will be challenged later on in this lesson to write your own insert_tail fun
 
 It is important to note that inserting at the head, and inserting at the tail each have a performance of O(1).
 
-### Inserting in the Middle
+### Inserting in the MIDDLE
 
 We will now learn how to insert a new node into the middle of the list. The process is a bit more complicated than inserting at the head or tail. 
 
@@ -419,6 +419,8 @@ While our function currently handles most of our limitations, there is still one
 
 Within the if portion of our if statement, let's create another if statement that handles the insertion if the current node is the tail. 
 
+** Don't forget to add a __return__ keyword after the inner if statement. We need the return keyword there so that the function can finish after we insert the new node. 
+
 ```python
 def insert_middle(self, value, new_value):
 
@@ -442,24 +444,69 @@ We now have a properly working function that inserts a node into the middle of t
 
 ### Big O Notation
 
-It is important to note that inserting a node into the middle of a linked list has a performance of O(n).
+It is important to note that inserting a node into the middle of a linked list has a performance of O(n). This is because searching for a node in the list is O(1) and inserting a node in the list is O(1). Two O(1)'s together create a 2O(n), or an O(n).
 
 
-## Removing a Node from a Linked List
+## REMOVING a Node from a Linked List
 
-The process of removing a node from a linked list is generally a lot simpler than inserting a node, as there are less steps to follow.
+The process of removing a node from a linked list is generally a lot simpler than inserting a node, as there are less steps to follow. As with the insertion process, there are 3 places we can remove a node from, each with their own different steps:
 
-### Removing the Head
+- The Head
+- The Tail
+- The Middle
+
+Let's go over each how to remove a node from each of these places.
+
+### Removing the HEAD
+
+Since we are just removing the head, we do not need to pass a parameter into our function
+
+```python
+def remove_head(self):
+```
 
 1. Set the "prev" of the second node to None
 
 ![Set prev to none](images/set_prev_none.png)
 
+Since we are in the process of making the second node the new head, we will set its "prev" pointer to None. In python, we will access the "prev" pointer of the second node, by first accessing the current head's "next" pointer, as shown below:
+
+```python
+self.head.next.prev = None
+```
+
 2. Set the head equal to the second node
 
 ![Set second to head](images/second_to_head.png)
 
-Here are what these steps look like when written as a function:
+Now that we have set second node's "prev" pointer equal to None, all that's left to do is set the head (self.head) equal to the second node. We will access the second node by once again, first accessing the current head's "next" pointer as shown below:
+
+```python
+self.head = self.head.next
+```
+After completing those two steps, here is what your remove_head should currently look like:
+
+```python
+def remove_head(self):
+    # step 1: Set the "prev" of the second node to None
+    self.head.next.prev = None
+    # step 2: Set the head equal to the second node
+    self.head = self.head.next
+```
+### Handling Exceptions
+
+One exception we need to consider when removing the head, is what if there is only one node in the list? We can't set a second node to equal the head if there isn't a second node to being with. 
+
+In our function, let's create an if statement to handle this. In the if portion of the if statement, our condition will check to see if there is only one node in the list (if the head is the same as the tail). Inside the if portion, all we need to do to remove the one node is set both the head and tail equal to None.
+
+```python
+if self.head == self.tail:
+    self.head = None
+    self.tail = None
+```
+The else portion of our if statement will be the steps we've just written.
+
+Here is what your remove_head function should look like now, with the new if statement:
 
 ```python
 def remove_head(self):
@@ -468,14 +515,16 @@ def remove_head(self):
             self.head = None
             self.tail = None
         # these are the steps we just went over
-        elif self.head is not None:
+        else:
             #step 1: Set the "prev" of the second node to None
             self.head.next.prev = None
             #step 2: Set the head equal to the second node
             self.head = self.head.next  
 ```
 
-### Removing the Tail
+### Removing the TAIL
+
+Here are the steps to remove the tail from a linked list. Similar to how insert_tail is similar to insert_head, remove_tail is similar to remove_head; you just need to take into consideration the fact that you are removing the tail instead of the head.
 
 1. Set the "next" of the second to last node to None
 
@@ -485,9 +534,11 @@ def remove_head(self):
 
 ![Second to last is tail](images/last_to_tail.png)
 
-**Removing the head and the tail each have an O(1) performance. 
+You will be challenged to write the remove_tail function later on in this lesson, so we will not be writing it here. It is important to remember however that the exception handling in remove_head will be very similar to the handling in remove_tail.
 
-**If the node you are removing is the last node in the list, set both the head and tail to None.
+### Big O Notation
+
+Removing the head and the tail each have an O(1) performance, since the head and tail are already defined, and don't need to be searched for. 
 
 ### Removing from the Middle
 
