@@ -542,6 +542,12 @@ Removing the head and the tail each have an O(1) performance, since the head and
 
 ### Removing from the Middle
 
+When removing a node from the middle of a linked list, we first need to search for the value of the node we want to remove. Because of this, when defining our remove_middle function, we need a __value__ parameter that will hold the value of the node we are searching for. 
+
+```python
+def remove_middle(self, value):
+```
+
 Let's say we are trying to remove the node with a value of 2 from the linked list.
 
 1. Set the "prev" pointer of the node after 2 to equal the node before 2.
@@ -555,13 +561,13 @@ Let's say we are trying to remove the node with a value of 2 from the linked lis
 By doing these steps, the linked list essentially squeezes out the node we don't want. This is what the function would look like written in python.
 
 ```python
-def remove(self, value):
+def remove_middle(self, value):
         """
         Remove the first node that contains 'value'.
         """
         curr = self.head #start at the head
         while curr is not None: #while there is a value in the node
-            if curr.data == value: #if the current node's data matches the value we're looking for
+            if curr.value == value: #if the current node's data matches the value we're looking for
                 #if the value is the tail, we can call the remove tail function to remove it
                 if curr == self.tail:
                     self.remove_tail()
@@ -576,7 +582,92 @@ def remove(self, value):
             curr = curr.next #go to the next node's value if you the current node's value is not a match
 ```
 
-**Removing a node from the middle of a linked list has a performance of O(n).
+As you can see, this function is structured similarly to how our insert_middle function is structured. While there are still nodes left in the list, the function searches through each of the nodes in the linked list, starting at the head, looking for a matching value. If a matching value is found, there is then a check that checks to see if the node with the matching value is either the head or tail. If it is either the head or tail, the remove_head or remove_tail function is called. If the node with the matching value isn't the head or tail, then the steps are taken to remove the node from the linked list. If a matching node isn't found, then the next node in the list is checked, until the end of the list is reached. 
+
+### Big O Notation
+
+Removing a node from the middle of a linked list has a performance of O(n). This is because searching for a matching value is O(1), and deleting a node is O(1). Two O(1)'s equal 2O(n), or O(n).
+
+## Example Tests
+
+Now let's test the functions that we do have to see if they work. Before we begin, let's insert an __iter__ function, so that we can print our our linked list:
+
+```python
+def __iter__(self):
+        """
+        Iterate foward through the Linked List
+        """
+        curr = self.head  # Start at the begining since this is a forward iteration.
+        while curr is not None:
+            yield curr.value  # Provide (yield) each item to the user
+            curr = curr.next # Go forward in the linked list
+```
+
+Now, your LinkedList class should look like this:
+
+[Linked Lists Solution So Far](solutions/linked_lists_practice.py)
+
+In the same file as your LinkedList class, at the bottom, write the following code. These lines of code are meant to test the functions we have written so far. The comments in green represent what is supposed to show when the code is run:
+
+```python
+ll = LinkedList()
+ll.insert_head(100)
+ll.insert_head(50)
+ll.insert_head(25)
+
+for x in ll:
+    print(x) #25, 50, 100
+
+print("===============")
+ll.insert_middle(50, 75)
+
+for x in ll:
+    print(x) #25, 50, 75, 100
+
+print("===============")
+
+ll.remove_head()
+ll.remove_middle(75)
+
+for x in ll:
+    print(x) #50, 100
+```
+
+If everything worked our correctly, you should have seen the code comments in your terminal when the code was run. (Since we are looping through the linked list, each node will be printed out on a new line).
+
+## Now You Try
+
+It is now up to you to finish writing the insert_tail and remove_tail methods in the LinkedList class. Remember the steps you need to follow to insert and remove nodes at the tail, and consider any exceptions that need to be handled (What if the linked list is empty? What if there is only one node in the linked list?) A link to the solution is provided below, but it is encouraged that you try to solve the problem on your own for at least an hour before viewing it. 
+
+After you have finished writing the code, enter this test code below your current test code, to see if your insert_tail and remove_tail functions work. As always, the green comments represent what you should see when you run your code. 
+
+```python
+print("===============")
+
+ll.remove_tail()
+ll.remove_tail()
+
+for x in ll: 
+    print(x) #list should be empty
+
+print("===============")   
+
+ll.insert_tail(1)
+ll.insert_tail(2)
+ll.insert_tail(3)
+ll.insert_tail(4)
+ll.insert_tail(5)
+
+for x in ll:
+    print(x) #1, 2, 3, 4, 5
+```
+
+Here is the link to the solution:
+
+[Linked Lists Solution](solutions/linked_lists_solution.py)
+
+
+[Return to Home](0-welcome.md)
 
 
 
